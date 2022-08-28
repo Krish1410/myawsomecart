@@ -1,0 +1,62 @@
+{% extends 'shop/bace.html' %}
+{% block title %}{{prod.p_name}}{% endblock title %}
+{% block body %}
+
+<div class="container ">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+
+                <img src='/media/{{prod.p_img}}'class="card-img-top my-3" alt="...">
+            </div>
+            <button id='pr{{prod.id}}' class="cart btn btn-primary">Add to cart</button>
+        </div>
+        <div class="col-md-8">
+            <h4>{{prod.p_name}}</h4>
+            <h6><b>&#8377;{{prod.p_price}}</b></h6>
+            <p>{{prod.p_des}}</p>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+{% block js %} 
+<script>
+  console.log("working");
+  if(localStorage.getItem('cart')==null){
+
+    var cart={};
+  }
+  else{
+    
+    cart=JSON.parse(localStorage.getItem('cart'));
+    document.getElementById('cart').innerHTML= Object.keys(cart).length;
+  }
+  $('.cart').click(function(){
+
+    console.log('clicked');
+    var idstr= this.id.toString();
+    console.log(idstr);
+    if(cart[idstr]!= undefined) {
+      cart[idstr] = cart[idstr]+1;
+    }
+    else{
+      cart[idstr] = 1;
+    }
+      console.log(cart);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      document.getElementById('cart').innerHTML= Object.keys(cart).length;
+  });
+  //THis is for show a Tooltip
+  const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+  const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))//This is for change content of tooltip
+// getOrCreateInstance example
+const myPopover = bootstrap.Popover.getOrCreateInstance('#popvercart') // Returns a Bootstrap popover instance
+
+// setContent example
+myPopover.setContent({
+'.popover-header': 'another title',
+'.popover-body': '<h6>another content</h6>'
+})
+</script> 
+{% endblock js %}

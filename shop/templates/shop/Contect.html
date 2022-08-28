@@ -1,0 +1,32 @@
+{% extends 'shop/bace.html' %}
+
+{% block title %}Contect-My Awsome Cart{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Contect Us</h1>
+    <form method="POST" action="/shop/contect/">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="ContectName" class="form-label">Name</label>
+          <input type="text" class="form-control" id="ContectName" name="ContectName" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="ContectEmail" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="ContectEmail" name="ContectEmail">
+        </div>
+        <div class="mb-3">
+          <label for="ContectNumber" class="form-label">Phone Number</label>
+          <input type="number" class="form-control" id="ContectNumber" name="ContectNumber">
+        </div>
+        <div class="mb-3">
+            <label for="Contectdesc" class="form-label">How may we help you?</label>
+            <textarea class="form-control" id="Contectdesc" rows="3" name="Contectdesc"></textarea>
+        </div>
+       
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+
+{% endblock body %}
